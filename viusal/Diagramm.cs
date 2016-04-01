@@ -36,35 +36,33 @@ namespace viusal
             timeline.RemoveAt(timeline.Count - 1);
             viewport.Paint += Viewport_Paint;
 
-
-            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < timeline.Count; i++)
             {
+                string line = i.ToString() + ":\t";
                 for (int j = 0; j < timeline[i].Count; j++)
-                {
-                    sb.Append(timeline[i][j] ? "1" : "0");
-                }
-                sb.Append('\n');
+                    line += timeline[i][j] ? "1" : "0";
+                this.table.Items.Add(line);
             }
-            MessageBox.Show(sb.ToString());
         }
 
         private void Viewport_Paint(object sender, PaintEventArgs e)
         {
-            int y, x = 0;
+            int y = 0;
+            int x = 0;
             int h = (int)stepH.Value;
             int dy = (int)delta.Value + h;
             int dx = (int)stepW.Value;
             int endX = (int)(loopCount.Value * timeline.Count * dx);
             Pen pen = new Pen(color1.BackColor);
+            Brush brush = new SolidBrush(color2.BackColor);
 
-            y = 0;
+
             for (int j = 0; j < timeline.First().Count; j++)
             {
-                e.Graphics.DrawString(string.Format("{0}", (char)('A' + j)), Font, new SolidBrush(color2.BackColor), 0, y);
+                e.Graphics.DrawString(string.Format("{0}", (char)('A' + j)), Font, brush, 0, y);
                 y += dy;
             }
-            e.Graphics.DrawString("clock", Font, new SolidBrush(color2.BackColor), 0, y + dy);
+            e.Graphics.DrawString("clock", Font, brush, 0, y + dy);
 
             while (x < endX)
             {
@@ -75,6 +73,9 @@ namespace viusal
                     for (int j = 0; j < timeline[i].Count; j++)
                     {
                         int _y = timeline[i][j] ? y - h : y;
+
+                        if (enableText.Checked)
+                            e.Graphics.DrawString(timeline[i][j] ? "1" : "0", Font, brush, x + (int)stepW.Value/3, y + h / 2 - dy);
 
                         e.Graphics.DrawLine(pen, x, _y, x + dx, _y);
 
@@ -93,7 +94,6 @@ namespace viusal
 
                     x += dx;
                 }
-                pen = new Pen(pen.Color == color1.BackColor ? color2.BackColor : color1.BackColor);
             }
         }
 

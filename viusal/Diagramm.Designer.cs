@@ -46,6 +46,9 @@
             this.color1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.color2 = new System.Windows.Forms.Button();
+            this.enableText = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.table = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.stepW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stepH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delta)).BeginInit();
@@ -58,10 +61,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.viewport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.viewport.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.viewport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.viewport.Location = new System.Drawing.Point(184, 12);
             this.viewport.Name = "viewport";
-            this.viewport.Size = new System.Drawing.Size(970, 244);
+            this.viewport.Size = new System.Drawing.Size(840, 270);
             this.viewport.TabIndex = 0;
             // 
             // stepW
@@ -91,7 +94,7 @@
             this.stepW.TabIndex = 2;
             this.stepW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.stepW.Value = new decimal(new int[] {
-            20,
+            35,
             0,
             0,
             0});
@@ -228,7 +231,7 @@
             this.save.FlatAppearance.BorderSize = 0;
             this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.save.ForeColor = System.Drawing.Color.Gainsboro;
-            this.save.Location = new System.Drawing.Point(12, 233);
+            this.save.Location = new System.Drawing.Point(12, 259);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(166, 23);
             this.save.TabIndex = 64;
@@ -248,7 +251,7 @@
             this.backgroundColor.FlatAppearance.BorderSize = 0;
             this.backgroundColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backgroundColor.ForeColor = System.Drawing.Color.Gainsboro;
-            this.backgroundColor.Location = new System.Drawing.Point(119, 131);
+            this.backgroundColor.Location = new System.Drawing.Point(119, 159);
             this.backgroundColor.Name = "backgroundColor";
             this.backgroundColor.Size = new System.Drawing.Size(59, 23);
             this.backgroundColor.TabIndex = 67;
@@ -259,7 +262,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(12, 141);
+            this.label5.Location = new System.Drawing.Point(12, 169);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 15);
             this.label5.TabIndex = 68;
@@ -269,7 +272,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(12, 170);
+            this.label6.Location = new System.Drawing.Point(12, 198);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 15);
             this.label6.TabIndex = 70;
@@ -282,7 +285,7 @@
             this.color1.FlatAppearance.BorderSize = 0;
             this.color1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.color1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.color1.Location = new System.Drawing.Point(119, 160);
+            this.color1.Location = new System.Drawing.Point(119, 188);
             this.color1.Name = "color1";
             this.color1.Size = new System.Drawing.Size(59, 23);
             this.color1.TabIndex = 69;
@@ -293,7 +296,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(12, 199);
+            this.label7.Location = new System.Drawing.Point(12, 227);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 72;
@@ -301,24 +304,64 @@
             // 
             // color2
             // 
-            this.color2.BackColor = System.Drawing.Color.ForestGreen;
+            this.color2.BackColor = System.Drawing.Color.Ivory;
             this.color2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.color2.FlatAppearance.BorderSize = 0;
             this.color2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.color2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.color2.Location = new System.Drawing.Point(119, 189);
+            this.color2.Location = new System.Drawing.Point(119, 217);
             this.color2.Name = "color2";
             this.color2.Size = new System.Drawing.Size(59, 23);
             this.color2.TabIndex = 71;
             this.color2.UseVisualStyleBackColor = false;
             this.color2.Click += new System.EventHandler(this.color_Click);
             // 
+            // enableText
+            // 
+            this.enableText.AutoSize = true;
+            this.enableText.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.enableText.Location = new System.Drawing.Point(119, 139);
+            this.enableText.Name = "enableText";
+            this.enableText.Size = new System.Drawing.Size(15, 14);
+            this.enableText.TabIndex = 73;
+            this.enableText.UseVisualStyleBackColor = true;
+            this.enableText.CheckedChanged += new System.EventHandler(this.Setting_ValueChanged);
+            this.enableText.VisibleChanged += new System.EventHandler(this.Setting_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.Location = new System.Drawing.Point(9, 138);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 15);
+            this.label8.TabIndex = 74;
+            this.label8.Text = "Подробно:";
+            // 
+            // table
+            // 
+            this.table.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.table.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(55)))));
+            this.table.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.table.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.table.ForeColor = System.Drawing.Color.Gainsboro;
+            this.table.FormattingEnabled = true;
+            this.table.ItemHeight = 15;
+            this.table.Location = new System.Drawing.Point(1030, 12);
+            this.table.Name = "table";
+            this.table.Size = new System.Drawing.Size(124, 272);
+            this.table.TabIndex = 75;
+            // 
             // Diagramm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(1166, 268);
+            this.ClientSize = new System.Drawing.Size(1166, 294);
+            this.Controls.Add(this.table);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.enableText);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.color2);
             this.Controls.Add(this.label6);
@@ -369,5 +412,8 @@
         private System.Windows.Forms.Button color1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button color2;
+        private System.Windows.Forms.CheckBox enableText;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox table;
     }
 }
