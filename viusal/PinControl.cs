@@ -267,7 +267,7 @@ namespace viusal
             colorDialog.Color = picColor.BackColor;
         }
 
-        private void AddToMxnf(string text)
+        private void AddToMxnf(string text, bool update = true)
         {
             Label label = new Label();
             label.ForeColor = picColor.BackColor;
@@ -309,7 +309,9 @@ namespace viusal
                 Mxnf.Controls.Add(label2);
 
             Mxnf.Controls.Add(label);
-            FinalOpUpdate();
+
+            if (update)
+                FinalOpUpdate();
         }
 
         private void Label_MouseEnter(object sender, EventArgs e)
@@ -394,6 +396,8 @@ namespace viusal
         private void FinalOpUpdate()
         {
             finalOp.Text = "";
+            int count = 0;
+
             foreach (Label l in Mxnf.Controls)
             {
                 if (l.Tag == null)
@@ -401,8 +405,20 @@ namespace viusal
                 if (dnf)
                     finalOp.Text += string.Format("({0})/", string.Join("/", l.Text.ToArray()));
                 else
-                    finalOp.Text += string.Format("{0}|", l.Text.Replace('+', '|'));
+                {
+                    string s = l.Text;
+                    if (s.Length == 3)
+                        s = Invert(s[1].ToString());
+                    else
+                        s = s.Replace('+', '|');
+
+                    finalOp.Text += string.Format("{0}|", s);
+                    count++;
+                }
             }
+
+            if (count == 1)
+                finalOp.Text = string.Format("{0}{0}", finalOp.Text);
 
             if (finalOp.Text.Length != 0)
                 finalOp.Text = finalOp.Text.Remove(finalOp.Text.Length - 1);
@@ -511,7 +527,7 @@ namespace viusal
                     if (max.All(g => tag.Contains(g)))
                         task.Remove(tag);
                 }
-                AddToMxnf(max);
+                AddToMxnf(max, false);
             }
 
             FinalOpUpdate();
