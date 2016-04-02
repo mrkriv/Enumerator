@@ -34,10 +34,11 @@
             this.trunTableB = new System.Windows.Forms.ListBox();
             this.handel = new System.Windows.Forms.Label();
             this.tabs = new viusal.STabControl();
-            this.maleSkhema = new System.Windows.Forms.Button();
+            this.maleSkhemaD = new System.Windows.Forms.Button();
             this.makeDiagram = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.maleSkhemaJK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // trunTableDA
@@ -127,20 +128,20 @@
             this.tabs.Size = new System.Drawing.Size(772, 583);
             this.tabs.TabIndex = 11;
             // 
-            // maleSkhema
+            // maleSkhemaD
             // 
-            this.maleSkhema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.maleSkhema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.maleSkhema.FlatAppearance.BorderSize = 0;
-            this.maleSkhema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.maleSkhema.ForeColor = System.Drawing.Color.Gainsboro;
-            this.maleSkhema.Location = new System.Drawing.Point(608, 599);
-            this.maleSkhema.Name = "maleSkhema";
-            this.maleSkhema.Size = new System.Drawing.Size(236, 23);
-            this.maleSkhema.TabIndex = 66;
-            this.maleSkhema.Text = "Построить схему на D-TR в базисе NAND";
-            this.maleSkhema.UseVisualStyleBackColor = false;
-            this.maleSkhema.Click += new System.EventHandler(this.maleSkhema_Click);
+            this.maleSkhemaD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.maleSkhemaD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.maleSkhemaD.FlatAppearance.BorderSize = 0;
+            this.maleSkhemaD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.maleSkhemaD.ForeColor = System.Drawing.Color.Gainsboro;
+            this.maleSkhemaD.Location = new System.Drawing.Point(366, 598);
+            this.maleSkhemaD.Name = "maleSkhemaD";
+            this.maleSkhemaD.Size = new System.Drawing.Size(236, 23);
+            this.maleSkhemaD.TabIndex = 66;
+            this.maleSkhemaD.Text = "Построить схему на D-TR в базисе NAND";
+            this.maleSkhemaD.UseVisualStyleBackColor = false;
+            this.maleSkhemaD.Click += new System.EventHandler(this.maleSkhema_Click);
             // 
             // makeDiagram
             // 
@@ -149,7 +150,7 @@
             this.makeDiagram.FlatAppearance.BorderSize = 0;
             this.makeDiagram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.makeDiagram.ForeColor = System.Drawing.Color.Gainsboro;
-            this.makeDiagram.Location = new System.Drawing.Point(850, 599);
+            this.makeDiagram.Location = new System.Drawing.Point(850, 598);
             this.makeDiagram.Name = "makeDiagram";
             this.makeDiagram.Size = new System.Drawing.Size(139, 23);
             this.makeDiagram.TabIndex = 65;
@@ -177,13 +178,28 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button1.Location = new System.Drawing.Point(422, 598);
+            this.button1.Location = new System.Drawing.Point(216, 598);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 23);
+            this.button1.Size = new System.Drawing.Size(144, 23);
             this.button1.TabIndex = 67;
-            this.button1.Text = "Минимизировать все карты";
+            this.button1.Text = "Минимизировать все";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.build_all);
+            // 
+            // maleSkhemaJK
+            // 
+            this.maleSkhemaJK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.maleSkhemaJK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.maleSkhemaJK.FlatAppearance.BorderSize = 0;
+            this.maleSkhemaJK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.maleSkhemaJK.ForeColor = System.Drawing.Color.Gainsboro;
+            this.maleSkhemaJK.Location = new System.Drawing.Point(608, 598);
+            this.maleSkhemaJK.Name = "maleSkhemaJK";
+            this.maleSkhemaJK.Size = new System.Drawing.Size(236, 23);
+            this.maleSkhemaJK.TabIndex = 68;
+            this.maleSkhemaJK.Text = "Построить схему на JK-TR в базисе NOR";
+            this.maleSkhemaJK.UseVisualStyleBackColor = false;
+            this.maleSkhemaJK.Click += new System.EventHandler(this.button2_Click);
             // 
             // Calculator
             // 
@@ -191,9 +207,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(1000, 629);
+            this.Controls.Add(this.maleSkhemaJK);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnNew);
-            this.Controls.Add(this.maleSkhema);
+            this.Controls.Add(this.maleSkhemaD);
             this.Controls.Add(this.makeDiagram);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.handel);
@@ -217,9 +234,10 @@
         private System.Windows.Forms.ListBox trunTableB;
         private System.Windows.Forms.Label handel;
         private STabControl tabs;
-        private System.Windows.Forms.Button maleSkhema;
+        private System.Windows.Forms.Button maleSkhemaD;
         private System.Windows.Forms.Button makeDiagram;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button maleSkhemaJK;
     }
 }

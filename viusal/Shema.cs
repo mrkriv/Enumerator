@@ -15,14 +15,16 @@ namespace viusal
         List<List<string>> mxnf;
         Brush brush1, brush2;
         Pen pen1, pen2;
+        bool mode;
 
-        public Shema(List<List<string>> mxnf)
+        public Shema(List<List<string>> mxnf, bool mode)
         {
             InitializeComponent();
 
             this.mxnf = mxnf;
             updateBrushs();
             viewport.Paint += Viewport_Paint;
+            this.mode = mode;
         }
 
         private void Setting_ValueChanged(object sender, EventArgs e)
@@ -75,16 +77,18 @@ namespace viusal
             int d = (int)grid.Value;
 
             int x;
-            if(useInvert.Checked)
-                x = d * (mxnf.Count * 2 + 2);
+            int count = mode ? mxnf.Count : (mxnf.Count / 2);
+            if (useInvert.Checked)
+                x = d * (count * 2 + 2);
             else
-                x = d * (mxnf.Count + 3);
+                x = d * (count + 3);
 
             int _x = 0;
             int sx = x - d * 3;
             int _y = 0;
             int y = x;
             int mx = 0;
+            string basis = mode ? "&" : "1";
 
             var outputT = new List<Point>();
             for (int i = 0; i < mxnf.Count; i++)
@@ -115,13 +119,22 @@ namespace viusal
                         y += d;
                     }
 
-                    e.Graphics.DrawRectangle(pen1, x, _y - d / 2, d * 3, y - _y);
-                    e.Graphics.DrawString("&", Font, brush2, x + d / 3 * 2, _y - d / 3);
+                    if (mode || (!mode && mxnf[i][j].Length > 1))
+                    {
+                        e.Graphics.DrawRectangle(pen1, x, _y - d / 2, d * 3, y - _y);
+                        e.Graphics.DrawString(basis, Font, brush2, x + d / 3 * 2, _y - d / 3);
 
-                    _x = x + d * 3;
-                    _y = y - d / 2 - (y - _y) / 2;
-                    e.Graphics.DrawEllipse(pen1, _x - 3, _y - 3, d / 3 * 2, d / 3 * 2);
-                    e.Graphics.DrawLine(pen1, _x, _y, _x + d, _y);
+                        _x = x + d * 3;
+                        _y = y - d / 2 - (y - _y) / 2;
+                        e.Graphics.DrawEllipse(pen1, _x - 3, _y - 3, d / 3 * 2, d / 3 * 2);
+                        e.Graphics.DrawLine(pen1, _x, _y, _x + d, _y);
+                    }
+                    else
+                    {
+                        _x = x + d * 3;
+                        _y = y - d / 2 - (y - _y) / 2;
+                        e.Graphics.DrawLine(pen1, _x - d * 3, _y, _x + d, _y);
+                    }
 
                     output.Add(_y);
                     y += d * 2;
@@ -130,7 +143,7 @@ namespace viusal
                 _x += d;
                 int _mx = _x + d * (4 + output.Count);
 
-                if (output.Count != 1)
+                if (output.Count > 1)
                 {
                     int _sx = _x;
                     _x += d;
@@ -144,7 +157,7 @@ namespace viusal
                     }
                     _y = output[0] - d + (output.Count + 1) * d;
                     e.Graphics.DrawRectangle(pen1, _mx, output[0] - d, d * 3, (output.Count + 1) * d);
-                    e.Graphics.DrawString("&", Font, brush2, _mx + d / 3, output[0] - d + d / 3);
+                    e.Graphics.DrawString(basis, Font, brush2, _mx + d / 3, output[0] - d + d / 3);
                     _y -= (output.Count + 1) * d / 2;
                     e.Graphics.DrawEllipse(pen1, _mx + d * 3 - d / 3, _y - d / 3, d / 3 * 2, d / 3 * 2);
 
@@ -161,18 +174,30 @@ namespace viusal
             }
             mx += d * 4;
 
-            bool first = true;
             var outputT2 = new List<int>();
-            foreach (Point p in outputT)
+            for (int i = 0; i < outputT.Count; i++)
             {
+                Point p = outputT[i];
                 e.Graphics.DrawLine(pen1, p.X, p.Y, mx, p.Y);
 
                 _x = mx + d * 2;
                 _y = p.Y + d * 7;
+
                 e.Graphics.DrawLine(pen1, _x, p.Y - d, _x, _y);
                 e.Graphics.DrawRectangle(pen1, mx, p.Y - d, d * 7, d * 8);
                 e.Graphics.DrawString("TT", Font, brush2, _x + d / 3, p.Y - d / 3 * 2);
-                e.Graphics.DrawString("D", Font, brush2, mx + d / 3, p.Y - d / 3 * 2);
+
+                if (mode)
+                    e.Graphics.DrawString("D", Font, brush2, mx + d / 3, p.Y - d / 3 * 2);
+                else
+                {
+                    Point p2 = outputT[++i];
+                    e.Graphics.DrawString("J", Font, brush2, mx + d / 3, p.Y - d / 3 * 2);
+                    e.Graphics.DrawString("K", Font, brush2, mx + d / 3, p.Y + d / 3 * 8);
+                    e.Graphics.DrawLine(pen1, p2.X, p2.Y, mx - d*3, p2.Y);
+                    e.Graphics.DrawLine(pen1, mx - d * 3, p2.Y, mx - d * 3, p.Y + d * 3);
+                    e.Graphics.DrawLine(pen1, mx - d * 3, p.Y + d * 3, mx, p.Y + d * 3);
+                }
 
                 if (useInvert.Checked)
                     outputT2.Add(_y - d * 6);
@@ -188,7 +213,7 @@ namespace viusal
                 _x = mx - d * 2;
                 e.Graphics.DrawLine(pen1, _x, _y, mx, _y);
 
-                if (first)
+                if ((i == 0 && mode) || (i == 1 && !mode))
                 {
                     int _y2 = y + d;
                     int _x2 = _x - d * 10;
@@ -197,7 +222,6 @@ namespace viusal
                     e.Graphics.DrawLine(pen1, _x2, _y2, _x, _y2);
                     e.Graphics.DrawEllipse(pen1, _x2 - 6, _y2 - 3, d / 3 * 2, d / 3 * 2);
                     e.Graphics.DrawString("Clock", Font, brush2, _x2, _y2 - d * 2);
-                    first = false;
                 }
                 else
                     e.Graphics.FillEllipse(brush1, _x - 3, _y - 3, d / 3 * 2, d / 3 * 2);
@@ -213,15 +237,20 @@ namespace viusal
             foreach (int oy in outputT2)
             {
                 int _n = outputT2.Count - n;
-                char c = n % 2 == 0 ? 'A' : 'a';
-                _x = mx + d * (_n+1);
+                _x = mx + d * (_n + 1);
+
+                char c;
+                if (useInvert.Checked)
+                    c = (char)((n % 2 == 0 ? 'A' : 'a') + _n / 2);
+                else
+                    c = (char)('A' + _n);
 
                 e.Graphics.DrawLine(pen1, x, y, x, my);
                 e.Graphics.DrawLine(pen1, x, y, _x, y);
                 e.Graphics.DrawLine(pen1, mx, oy, _x, oy);
                 e.Graphics.DrawLine(pen1, _x, y, _x, oy);
                 e.Graphics.DrawEllipse(pen1, x - 3, my, 6, 6);
-                e.Graphics.DrawString(string.Format("{0}", (char)(c + _n / 2)), Font, brush2, x - d / 2, my + d);
+                e.Graphics.DrawString(c.ToString(), Font, brush2, x - d / 2, my + d);
 
                 y += d;
                 x += d;

@@ -452,11 +452,23 @@ namespace viusal
         {
             var result = new List<string>();
 
-            foreach (Label l in Mxnf.Controls)
+            if (finalOp.Text != "")
             {
-                if (l.Tag == null)
-                    continue;
-                result.Add(l.Text);
+                foreach (string s in finalOp.Text.Split(')'))
+                {
+                    if (s != "")
+                        result.Add(s.Replace("(", "").Replace("|", "").Replace("/", ""));
+                }
+            }
+            else
+            {
+                if (dnf)
+                    result.Add("Aa");
+                else
+                {
+                    result.Add("AA");
+                    result.Add("AA");
+                }
             }
 
             return result;

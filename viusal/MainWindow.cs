@@ -83,7 +83,7 @@ namespace viusal
             Laucher.Instance.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void build_all(object sender, EventArgs e)
         {
             var ls = new List<List<string>>();
             foreach (TabPage page in tabs.TabPages)
@@ -99,34 +99,44 @@ namespace viusal
             new Diagramm(table).Show();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            maleSkhema(false);
+        }
+
         private void maleSkhema_Click(object sender, EventArgs e)
         {
+            maleSkhema(true);
+        }
+
+        private void maleSkhema(bool mode)
+        {
             var ls = new List<List<string>>();
+            bool auto = false;
             foreach (TabPage page in tabs.TabPages)
             {
                 TabControl tabs2 = (page.Controls[0] as ElementControl).pages;
                 foreach (TabPage page2 in tabs2.TabPages)
                 {
-                    if (page2.Text != "D")
+                    if ((page2.Text != "D") == mode)
                         continue;
 
                     PinControl ec = page2.Controls[0] as PinControl;
                     if (!ec.CheckMForm())
                     {
-                        MessageBox.Show("Минимальная форма '" + page.Text + "' не полная", "Ошибка");
-                        return;
+                        if (!auto)
+                        {
+                            if (MessageBox.Show("Минимальная форма '" + page.Text + "." + page2.Text + "' не полная.\nПостроить все за тебя?", "Форма не полная", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                                return;
+                            auto = true;
+                        }
+                        if (auto)
+                            ec.BuildAuto();
                     }
-                    var form = ec.GetMForm();
-                    if (form.Any(f => f.Any(c => char.ToLower(c) > 'c' + size - 1)))
-                    {
-                        MessageBox.Show("Минимальная форма '" + page.Text + "' не оптимальна, возможен более короткий вариант", "Ошибка");
-                        return;
-                    }
-
-                    ls.Add(form);
+                    ls.Add(ec.GetMForm());
                 }
             }
-            new Shema(ls).Show();
+            new Shema(ls, mode).Show();
         }
     }
 }
