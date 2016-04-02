@@ -304,11 +304,10 @@
             // 
             // color2
             // 
-            this.color2.BackColor = System.Drawing.Color.Ivory;
+            this.color2.BackColor = System.Drawing.Color.Gray;
             this.color2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.color2.FlatAppearance.BorderSize = 0;
             this.color2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.color2.ForeColor = System.Drawing.Color.Gainsboro;
             this.color2.Location = new System.Drawing.Point(119, 217);
             this.color2.Name = "color2";
             this.color2.Size = new System.Drawing.Size(59, 23);
@@ -332,7 +331,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(9, 138);
+            this.label8.Location = new System.Drawing.Point(12, 138);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 15);
             this.label8.TabIndex = 74;

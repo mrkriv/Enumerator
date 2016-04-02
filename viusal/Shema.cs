@@ -164,6 +164,8 @@ namespace viusal
                     output.Clear();
                     output.Add(_y);
                 }
+                else if (output.Count == 1)
+                    e.Graphics.DrawLine(pen1, _x, output[0], _x + d * 8, output[0]);
 
                 _x = _mx + d * 3;
                 if (mx < _x)

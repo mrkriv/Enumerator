@@ -430,7 +430,7 @@ namespace viusal
 
             foreach (Label btn in mapBtns.Controls)
             {
-                if (btn.Text == "1")
+                if ((btn.Text == "1" && dnf )|| (btn.Text == "0" && !dnf))
                     ls.Add(btn);
             }
 
@@ -438,9 +438,14 @@ namespace viusal
             {
                 if (l.Tag == null)
                     continue;
+
                 foreach (Label btn in mapBtns.Controls)
                 {
-                    if (l.Text.All(g => (btn.Tag as string).Contains(g)) && ls.Contains(btn))
+                    string text = l.Text.Replace("(", "").Replace(")", "").Replace("+", "");
+                    if (!dnf)
+                        text = Invert(text);
+
+                    if (text.All(g => (btn.Tag as string).Contains(g)) && ls.Contains(btn))
                         ls.Remove(btn);
                 }
             }

@@ -126,7 +126,7 @@ namespace viusal
                     {
                         if (!auto)
                         {
-                            if (MessageBox.Show("Минимальная форма '" + page.Text + "." + page2.Text + "' не полная.\nПостроить все за тебя?", "Форма не полная", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                            if (MessageBox.Show("Минимальная форма '" + page.Text + "." + page2.Text + "' не полная.\nПостроить все за тебя?", "Форма не полная", MessageBoxButtons.YesNo) == DialogResult.No)
                                 return;
                             auto = true;
                         }
